@@ -7,16 +7,77 @@
 package br.edu.ifsul.modelo;
 
 
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+
 /**
  *
  * @author jupassamani
  * @email juliapassamani@me.com
  */
-public class Game {
+@Entity
+@Table(name = "game")
+public class Game implements Serializable{
+    @Id
+    @SequenceGenerator(name = "seq_game", sequenceName = "seq_game_id",
+            allocationSize = 1)
+    @GeneratedValue(generator = "seq_game", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    
+    @NotBlank(message = "O nome deve ser informado")
+    @Length(max = 50,message = "O nome não deve ter mais de {max} caracteres")
+    @Column(name = "nome", length = 50, nullable = false)
     private String nome;
+    
+    @NotBlank(message = "O ano deve ser informado")
+    @Length(max = 4,message = "O ano não deve ter mais de {max} caracteres")
+    @Column(name = "ano", length = 4, nullable = false)
     private String ano;
+    
+    @NotBlank(message = "A jogabilidade deve ser informada")
+    @Length(max = 50,message = "A jogabilidade não deve ter mais de {max} caracteres")
+    @Column(name = "jogabilidade", length = 50, nullable = false)
     private String jogabilidade;
+
+    public Game() {
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" + "nome=" + nome + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Game other = (Game) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 
     public Integer getId() {
         return id;
