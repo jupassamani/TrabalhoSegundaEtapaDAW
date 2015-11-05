@@ -12,7 +12,7 @@ import javax.persistence.Persistence;
  * @author jupassamani
  * @email juliapassamani@me.com
  */
-public class TesteInserirGame {
+public class TesteInserirGameGenero {
 
     /**
      * @param args the command line arguments
@@ -23,17 +23,19 @@ public class TesteInserirGame {
         try {
             emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapa");
             em = emf.createEntityManager();
-            Genero gen = new Genero();
-            gen.setDescricao("Acao");
-            
             Game g = new Game();
-            g.setAno("2000");
+            Genero gen =  new Genero();
+            
+            g.setNome("Super Mario");
             g.setJogabilidade("Multiplayer");
-            g.setNome("Resident Evil 3");
+            g.setAno("1990");
+
+            gen.setDescricao("Aventura");
             gen.adicionarGame(g);
             
+            
             em.getTransaction().begin();
-            em.persist(gen); // inserir
+            em.persist(g); // inserir
             em.getTransaction().commit();
         } catch(Exception e){
             e.printStackTrace();

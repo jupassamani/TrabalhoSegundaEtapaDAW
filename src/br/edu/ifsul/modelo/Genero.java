@@ -7,14 +7,19 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
@@ -39,11 +44,20 @@ public class Genero implements Serializable{
     @Column(name = "descricao", length = 50, nullable = false)
     private String descricao;
     
-    @ManyToOne
-    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false)
-    private Game game;
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Game> games = new ArrayList<>();
+  
 
     public Genero() {
+    }
+    
+    public void adicionarGame(Game obj){
+        obj.setGenero(this);
+        this.games.add(obj);
+    }
+    
+    public void removerGame(int index){
+        this.games.remove(index);
     }
 
     @Override
@@ -89,11 +103,11 @@ public class Genero implements Serializable{
         this.descricao = descricao;
     }
 
-    public Game getGame() {
-        return game;
+    public List<Game> getGames() {
+        return games;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }
