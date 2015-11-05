@@ -8,12 +8,17 @@ package br.edu.ifsul.modelo;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
@@ -48,6 +53,9 @@ public class Game implements Serializable{
     @Length(max = 50,message = "A jogabilidade não deve ter mais de {max} caracteres")
     @Column(name = "jogabilidade", length = 50, nullable = false)
     private String jogabilidade;
+    
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    List<Genero> generos = new ArrayList<>();
 
     public Game() {
     }
