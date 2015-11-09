@@ -26,12 +26,6 @@ public class TesteInserirGame {
             Genero gen = new Genero();
             gen.setDescricao("Acao");
             
-            Game g = new Game();
-            g.setAno("2000");
-            g.setJogabilidade("Multiplayer");
-            g.setNome("Resident Evil 3");
-            gen.adicionarGame(g);
-            
             em.getTransaction().begin();
             em.persist(gen); // inserir
             em.getTransaction().commit();
