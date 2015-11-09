@@ -8,6 +8,8 @@ package br.edu.ifsul.modelo;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -55,6 +59,15 @@ public class Game implements Serializable{
     @JoinColumn(name = "genero_id", referencedColumnName = "id", nullable = false)
     private Genero genero;
     
+    @ManyToMany
+    @JoinTable(name = "contidos", 
+            joinColumns = 
+            @JoinColumn(name = "game", referencedColumnName = "id"),
+            inverseJoinColumns = 
+            @JoinColumn(name = "plataforma", referencedColumnName = "id")
+            )
+    private List<Plataforma> contidos = new ArrayList<>();
+
     public Game() {
     }
 
@@ -123,6 +136,14 @@ public class Game implements Serializable{
 
     public void setGenero(Genero genero) {
         this.genero = genero;
+    }
+    
+    public List<Plataforma> getContidos() {
+        return contidos;
+    }
+
+    public void setContidos(List<Plataforma> contidos) {
+        this.contidos = contidos;
     }
 
 }

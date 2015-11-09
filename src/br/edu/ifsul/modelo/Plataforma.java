@@ -6,10 +6,16 @@
 
 package br.edu.ifsul.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,6 +36,51 @@ public class Plataforma {
     private String nome;
     private String fabricante;
     private String tipo_midia;
+    @ManyToMany
+    @JoinTable(name = "contem", joinColumns = 
+            @JoinColumn(name = "plataforma", referencedColumnName = "id"),
+            inverseJoinColumns = 
+            @JoinColumn(name = "game", referencedColumnName = "id")
+            )
+    private List<Game> contem = new ArrayList<>();
+    
+    public Plataforma() {
+    }
+
+    @Override
+    public String toString() {
+        return "Plataforma{" + "nome=" + nome + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Plataforma other = (Plataforma) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    public List<Game> getContem() {
+        return contem;
+    }
+
+    public void setContem(List<Game> contem) {
+        this.contem = contem;
+    }
 
     public Integer getId() {
         return id;
