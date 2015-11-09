@@ -6,6 +6,7 @@
 
 package br.edu.ifsul.modelo;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "locacao")
-public class Locacao {
+public class Locacao implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_locacao", sequenceName = "seq_locacao_id",
             allocationSize = 1)

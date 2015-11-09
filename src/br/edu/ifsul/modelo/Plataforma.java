@@ -6,6 +6,7 @@
 
 package br.edu.ifsul.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +28,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "plataforma")
-public class Plataforma {
+public class Plataforma implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_plataforma", sequenceName = "seq_plataforma_id",
             allocationSize = 1)
