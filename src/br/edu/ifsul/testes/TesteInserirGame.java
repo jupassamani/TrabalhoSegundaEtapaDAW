@@ -12,8 +12,8 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author jupassamani
+ * @email juliapassamani@me.com
  */
 public class TesteInserirGame {
 
@@ -24,23 +24,16 @@ public class TesteInserirGame {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
-            emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapa");
+            emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
             em = emf.createEntityManager();
-            Genero obj = new Genero();
-            obj.setDescricao("Acao");
-            Game ga = new Game();
-            ga.setAno("1990");
-            ga.setJogabilidade("Multiplayer");
-            ga.setNome("Mario");
-            ga.setId(1);
-          //  ga.setGenero(obj);
-            List<Game> games = new ArrayList<>();
-            games.add(ga);
-            obj.setGames(games);
-            
+            Game g = new Game();
+            g.setAno("2000");
+            g.setGenero(em.find(Genero.class, 1));
+            g.setJogabilidade("Multiplayer");
+            g.setNome("Resident Evil 4");
             
             em.getTransaction().begin();
-            em.persist(obj); // inserir
+            em.persist(g); // inserir
             em.getTransaction().commit();
         } catch(Exception e){
             System.out.println("Erro: "+e.getMessage());
