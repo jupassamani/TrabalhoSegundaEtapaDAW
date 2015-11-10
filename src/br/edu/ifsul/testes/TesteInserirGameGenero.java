@@ -21,19 +21,12 @@ public class TesteInserirGameGenero {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
-            emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapa");
+            emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
             em = emf.createEntityManager();
-            Game g = new Game();
-            Genero gen =  new Genero();
+            Genero g = new Genero();
             
-            g.setNome("Super Mario");
-            g.setJogabilidade("Multiplayer");
-            g.setAno("1990");
-
-            gen.setDescricao("Aventura");
-            gen.adicionarGame(g);
-            
-            
+            g.adicionarGame(em.find(Game.class, 1));
+            g.setDescricao("Aventura");
             em.getTransaction().begin();
             em.persist(g); // inserir
             em.getTransaction().commit();

@@ -34,6 +34,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "genero")
 public class Genero implements Serializable{
     @Id
+    @Column(name = "id")
     @SequenceGenerator(name = "seq_genero", sequenceName = "seq_genero_id",
             allocationSize = 1)
     @GeneratedValue(generator = "seq_genero", strategy = GenerationType.SEQUENCE)
@@ -44,7 +45,7 @@ public class Genero implements Serializable{
     @Column(name = "descricao", length = 50, nullable = false)
     private String descricao;
     
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "genero", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Game> games = new ArrayList<>();
   
 
@@ -52,7 +53,7 @@ public class Genero implements Serializable{
     }
     
     public void adicionarGame(Game obj){
-        obj.setGenero(this);
+     //   obj.setGenero(this);
         this.games.add(obj);
     }
     

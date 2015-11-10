@@ -1,16 +1,19 @@
 
 package br.edu.ifsul.testes;
 
+
 import br.edu.ifsul.modelo.Game;
 import br.edu.ifsul.modelo.Genero;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
  *
- * @author jupassamani
- * @email juliapassamani@me.com
+ * @author Jorge Luis Boeira Bavaresco
+ * @email jorge.bavaresco@passofundo.ifsul.edu.br
  */
 public class TesteInserirGame {
 
@@ -23,14 +26,23 @@ public class TesteInserirGame {
         try {
             emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapa");
             em = emf.createEntityManager();
-            Genero gen = new Genero();
-            gen.setDescricao("Acao");
+            Genero obj = new Genero();
+            obj.setDescricao("Acao");
+            Game ga = new Game();
+            ga.setAno("1990");
+            ga.setJogabilidade("Multiplayer");
+            ga.setNome("Mario");
+            ga.setId(1);
+          //  ga.setGenero(obj);
+            List<Game> games = new ArrayList<>();
+            games.add(ga);
+            obj.setGames(games);
+            
             
             em.getTransaction().begin();
-            em.persist(gen); // inserir
+            em.persist(obj); // inserir
             em.getTransaction().commit();
         } catch(Exception e){
-            e.printStackTrace();
             System.out.println("Erro: "+e.getMessage());
             if (em.getTransaction().isActive() == false){
                 em.getTransaction().commit();

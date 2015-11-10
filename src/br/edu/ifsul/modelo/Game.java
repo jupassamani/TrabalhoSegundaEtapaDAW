@@ -35,6 +35,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "game")
 public class Game implements Serializable{
     @Id
+    @Column(name = "id")
     @SequenceGenerator(name = "seq_game", sequenceName = "seq_game_id",
             allocationSize = 1)
     @GeneratedValue(generator = "seq_game", strategy = GenerationType.SEQUENCE)
