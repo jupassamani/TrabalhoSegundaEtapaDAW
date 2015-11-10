@@ -61,7 +61,7 @@ public class Game implements Serializable{
     private Genero genero;
     
     @ManyToMany
-    @JoinTable(name = "contidos", 
+    @JoinTable(name = "contem", 
             joinColumns = 
             @JoinColumn(name = "game", referencedColumnName = "id"),
             inverseJoinColumns = 
