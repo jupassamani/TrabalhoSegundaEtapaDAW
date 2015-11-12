@@ -24,7 +24,7 @@ public class TesteInserirGamePlataforma {
         try {
             emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
             em = emf.createEntityManager();
-            Game g = em.find(Game.class, 1);
+            Game g = em.find(Game.class, 2);
             Plataforma p = em.find(Plataforma.class, 1);
             p.getContem().add(g);
             
