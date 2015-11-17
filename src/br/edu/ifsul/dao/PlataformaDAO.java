@@ -6,7 +6,7 @@
 
 package br.edu.ifsul.dao;
 
-import br.edu.ifsul.modelo.Genero;
+import br.edu.ifsul.modelo.Plataforma;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,13 +18,13 @@ import javax.persistence.Persistence;
  * @author jupassamani
  * @email juliapassamani@me.com
  */
-public class GeneroDAO implements Serializable{
-    private List<Genero> listarTodos;
+public class PlataformaDAO implements Serializable{
+    private List<Plataforma> listarTodos;
 
-    public GeneroDAO() {
+    public PlataformaDAO() {
     }
-    
-public void persistir(Genero objeto) throws Exception{
+
+public void persistir(Plataforma objeto) throws Exception{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
@@ -45,7 +45,7 @@ public void persistir(Genero objeto) throws Exception{
         }        
     }
     
-    public void merge(Genero objeto) throws Exception{
+    public void merge(Plataforma objeto) throws Exception{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
@@ -73,7 +73,7 @@ public void persistir(Genero objeto) throws Exception{
             if (em.getTransaction().isActive() == false){
                 em.getTransaction().begin();
             }
-            Genero objeto = em.find(Genero.class, id);
+            Plataforma objeto = em.find(Plataforma.class, id);
             em.remove(objeto);
             em.getTransaction().commit();
         } catch(Exception e){
@@ -88,11 +88,11 @@ public void persistir(Genero objeto) throws Exception{
         }        
     }   
     
-    public Genero getObjectById(Integer id) throws Exception{
+    public Plataforma getObjectById(Integer id) throws Exception{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
-            return em.find(Genero.class, id);
+            return em.find(Plataforma.class, id);
         } catch(Exception e){
             if (em.getTransaction().isActive() == false){
                 em.getTransaction().begin();
@@ -105,11 +105,11 @@ public void persistir(Genero objeto) throws Exception{
         }        
     }     
 
-    public List<Genero> getListarTodos() throws Exception {
+    public List<Plataforma> getListarTodos() throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("from Genero order by descricao").getResultList();
+            return em.createQuery("from Plataforma order by nome").getResultList();
         } catch(Exception e){
             throw new Exception("Erro na operação de persistência: "+e.getMessage());
         } finally {
@@ -118,7 +118,7 @@ public void persistir(Genero objeto) throws Exception{
         }    
     }
 
-    public void setListarTodos(List<Genero> listarTodos) {
+    public void setListarTodos(List<Plataforma> listarTodos) {
         this.listarTodos = listarTodos;
     }
 }
