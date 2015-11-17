@@ -24,7 +24,7 @@ public class PlataformaDAO implements Serializable{
     public PlataformaDAO() {
     }
 
-public void persistir(Plataforma objeto) throws Exception{
+    public void persistir(Plataforma objeto) throws Exception{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {

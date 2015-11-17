@@ -6,7 +6,7 @@
 
 package br.edu.ifsul.dao;
 
-import br.edu.ifsul.modelo.Genero;
+import br.edu.ifsul.modelo.Locacao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,13 +18,13 @@ import javax.persistence.Persistence;
  * @author jupassamani
  * @email juliapassamani@me.com
  */
-public class GeneroDAO implements Serializable{
-    private List<Genero> listarTodos;
+public class LocacaoDAO implements Serializable{
+    private List<Locacao> listarTodos;
 
-    public GeneroDAO() {
+    public LocacaoDAO() {
     }
     
-    public void persistir(Genero objeto) throws Exception{
+    public void persistir(Locacao objeto) throws Exception{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
@@ -45,7 +45,7 @@ public class GeneroDAO implements Serializable{
         }        
     }
     
-    public void merge(Genero objeto) throws Exception{
+    public void merge(Locacao objeto) throws Exception{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
@@ -73,7 +73,7 @@ public class GeneroDAO implements Serializable{
             if (em.getTransaction().isActive() == false){
                 em.getTransaction().begin();
             }
-            Genero objeto = em.find(Genero.class, id);
+            Locacao objeto = em.find(Locacao.class, id);
             em.remove(objeto);
             em.getTransaction().commit();
         } catch(Exception e){
@@ -88,11 +88,11 @@ public class GeneroDAO implements Serializable{
         }        
     }   
     
-    public Genero getObjectById(Integer id) throws Exception{
+    public Locacao getObjectById(Integer id) throws Exception{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
-            return em.find(Genero.class, id);
+            return em.find(Locacao.class, id);
         } catch(Exception e){
             if (em.getTransaction().isActive() == false){
                 em.getTransaction().begin();
@@ -105,11 +105,11 @@ public class GeneroDAO implements Serializable{
         }        
     }     
 
-    public List<Genero> getListarTodos() throws Exception {
+    public List<Locacao> getListarTodos() throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrabalhoSegundaEtapaPU");
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("from Genero order by descricao").getResultList();
+            return em.createQuery("from Locacao order by status").getResultList();
         } catch(Exception e){
             throw new Exception("Erro na operação de persistência: "+e.getMessage());
         } finally {
@@ -118,7 +118,7 @@ public class GeneroDAO implements Serializable{
         }    
     }
 
-    public void setListarTodos(List<Genero> listarTodos) {
+    public void setListarTodos(List<Locacao> listarTodos) {
         this.listarTodos = listarTodos;
     }
 }
