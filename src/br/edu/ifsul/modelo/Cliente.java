@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -65,6 +67,11 @@ public abstract class Cliente implements Serializable{
     
     @Column(name = "telefone", nullable = false, length = 15)
     private String telefone;
+    
+    @NotNull(message = "O endereco deve ser informado")
+    @ManyToOne
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id", nullable = false)
+    private Endereco endereco;
 
     public Cliente() {
     }
@@ -142,6 +149,14 @@ public abstract class Cliente implements Serializable{
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
     
     

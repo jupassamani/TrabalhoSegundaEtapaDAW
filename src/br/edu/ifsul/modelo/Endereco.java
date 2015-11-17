@@ -7,12 +7,17 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -68,6 +73,9 @@ public class Endereco implements Serializable{
     @Length(max = 30, message = "O estado não pode ter mais de {max} caracteres")
     @Column(name = "estado", length = 30, nullable = false)
     private String Estado;
+    
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Cliente> cliente = new ArrayList<>();
 
     public Endereco() {
     }
@@ -148,6 +156,14 @@ public class Endereco implements Serializable{
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public List<Cliente> getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(List<Cliente> cliente) {
+        this.cliente = cliente;
     }
 
 }
