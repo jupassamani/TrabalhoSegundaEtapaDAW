@@ -9,12 +9,16 @@ package br.edu.ifsul.modelo;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -30,8 +34,18 @@ public class Locacao implements Serializable{
             allocationSize = 1)
     @GeneratedValue(generator = "seq_locacao", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    
+    @NotNull(message = "O status deve ser informado")
     private Boolean status;
+    
+    @NotNull(message = "A data de retirada deve ser informada")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_retirada", nullable = false)
     private Calendar data_retirada;
+    
+    @NotNull(message = "A data de entrega deve ser informada")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_entrega", nullable = false)
     private Calendar data_entrega;
 
     public Locacao() {

@@ -53,6 +53,12 @@ public abstract class Cliente implements Serializable{
     @CPF(message = "O CPF deve ser válido")
     private String cpf;
     
+    @NotNull(message = "O RG deve ser informado")
+    @NotBlank(message = "O RG não pode ficar em branco")
+    @Length(max = 10, message = "O RG não pode ter mais de {max} caracteres")
+    @Column(name = "RG", length = 10, nullable = false)      
+    private String rg;
+    
     @NotNull(message = "A data de nascimento deve ser informada")
     @Temporal(TemporalType.DATE)
     @Column(name = "nascimento", nullable = false)
@@ -157,6 +163,14 @@ public abstract class Cliente implements Serializable{
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
     }
     
     

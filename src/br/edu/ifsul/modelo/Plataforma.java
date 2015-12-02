@@ -43,7 +43,7 @@ public class Plataforma implements Serializable{
             inverseJoinColumns = 
             @JoinColumn(name = "game", referencedColumnName = "id")
             )
-    private List<Game> contem = new ArrayList<>();
+    private List<Game> games = new ArrayList<>();
     
     public Plataforma() {
     }
@@ -76,11 +76,11 @@ public class Plataforma implements Serializable{
     }
 
     public List<Game> getContem() {
-        return contem;
+        return games;
     }
 
     public void setContem(List<Game> contem) {
-        this.contem = contem;
+        this.games = games;
     }
 
     public Integer getId() {

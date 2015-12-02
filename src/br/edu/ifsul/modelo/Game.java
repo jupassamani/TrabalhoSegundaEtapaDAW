@@ -67,7 +67,7 @@ public class Game implements Serializable{
             inverseJoinColumns = 
             @JoinColumn(name = "plataforma", referencedColumnName = "id")
             )
-    private List<Plataforma> contidos = new ArrayList<>();
+    private List<Plataforma> plataforma = new ArrayList<>();
 
     public Game() {
     }
@@ -140,11 +140,11 @@ public class Game implements Serializable{
     }
     
     public List<Plataforma> getContidos() {
-        return contidos;
+        return plataforma;
     }
 
     public void setContidos(List<Plataforma> contidos) {
-        this.contidos = contidos;
+        this.plataforma = plataforma;
     }
 
 }
